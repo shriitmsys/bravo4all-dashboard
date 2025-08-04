@@ -2,10 +2,18 @@ import streamlit as st
 import pandas as pd
 import numpy as np  # Correct import
 import plotly.express as px
+from get_users import get_users
 
-st.set_page_config(page_title="Bravo4All Executive Dashboard", layout="wide")
+st.set_page_config(page_title="Bravo4All – Live API Dashboard", layout="wide")
+st.title("👥 Live Users from Unifocus")
 
-st.title("📊 Bravo4All – Hotel Workforce Performance")
+user_data = get_users()
+if user_data:
+    df = pd.json_normalize(user_data)
+    st.dataframe(df)
+else:
+    st.warning("No users found or API failed.")
+
 
 # Sample KPI Data
 st.subheader("Executive Summary")

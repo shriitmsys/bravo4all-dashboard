@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np  # Correct import
 import plotly.express as px
 
 st.set_page_config(page_title="Bravo4All Executive Dashboard", layout="wide")
@@ -13,16 +14,16 @@ col1.metric("Guest Satisfaction", "4.30 / 5", "+0.10 vs Premium")
 col2.metric("Total Rewards Investment", "$669,090", "")
 col3.metric("Workforce Attendance", "88.9%", "-1.1% vs Industry")
 
-# Sample Line Chart (Attendance Trends)
+# ✅ FIXED: Attendance Trends with numpy.random
 st.subheader("Attendance Trends")
 sample_data = pd.DataFrame({
     "Month": pd.date_range("2023-01-01", periods=12, freq="M"),
-    "Hilton NY": pd.np.random.uniform(85, 95, 12),
-    "Hyatt SF": pd.np.random.uniform(85, 95, 12),
+    "Hilton NY": np.random.uniform(85, 95, 12),
+    "Hyatt SF": np.random.uniform(85, 95, 12),
 })
 st.line_chart(sample_data.set_index("Month"))
 
-# Sample Bar Chart
+# Bar Chart
 st.subheader("Training Completion Rate by Property")
 bar_data = pd.DataFrame({
     "Property": ["Hilton NY", "Hyatt SF", "Marriott LA", "Sheraton Dallas"],
